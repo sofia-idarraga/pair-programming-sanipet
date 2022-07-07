@@ -1,4 +1,4 @@
-package com.sofka.employee;
+package com.sofka.management;
 
 import java.time.DayOfWeek;
 

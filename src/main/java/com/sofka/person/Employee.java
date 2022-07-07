@@ -1,4 +1,6 @@
-package com.sofka.employee;
+package com.sofka.person;
+
+import com.sofka.management.Schedule;
 
 import java.util.ArrayList;
 import java.util.List;
