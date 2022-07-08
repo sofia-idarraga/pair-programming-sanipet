@@ -11,7 +11,7 @@ public class UiMenu {
     private ArrayList<Pet> pets = new ArrayList<Pet>();
 
 
-    Scanner sc = new Scanner(System.in);
+    Reader reader = new Reader();
 
     // Appointment options must manage CRUD
     // No need to make filterings at medicine
@@ -45,33 +45,33 @@ public class UiMenu {
                     5. Exit
                     
                     """);
-
+            option = reader.scannerInt();
 
             switch(option){
                 case 1:{
                     createPatient();
                     break;
                 }
-                case 2:
+                case 2:{
+
+                }
+
             }
-
-            option = sc.nextInt();
-
         } while(option != 5);
     }
 
     public void createPatient(){
 
         System.out.println("Enter onwer´s DNI");
-        String ownerDNI = sc.nextLine();
+        String ownerDNI = reader.scannerText();
         System.out.println("Enter onwer´s name");
-        String ownerName = sc.nextLine();
+        String ownerName = reader.scannerText();
         System.out.println("Enter onwer´s surname");
-        String ownerSurname = sc.nextLine();
+        String ownerSurname = reader.scannerText();
         System.out.println("Enter onwer´s cellphone");
-        String ownerCellphone = sc.nextLine();
+        String ownerCellphone = reader.scannerText();
         System.out.println("Enter owner´s age");
-        int ownerAge = sc.nextInt();
+        int ownerAge = reader.scannerInt();
         if(ownerAge < 18){
             System.out.println("Pet admission is only accepted by an adult ");
             return;
@@ -80,21 +80,21 @@ public class UiMenu {
         Owner owner = new Owner(ownerDNI, ownerName, ownerSurname, ownerCellphone, ownerAge);
 
         System.out.println("Enter the Pet´s species");
-        String petSpecies = sc.nextLine();
+        String petSpecies = reader.scannerText();
         System.out.println("Enter the Pet´s name");
-        String petName = sc.nextLine();
+        String petName = reader.scannerText();
         System.out.println("Enter the Pet´s breed");
-        String petbreed = sc.nextLine();
+        String petbreed = reader.scannerText();
         System.out.println("Enter 1 if Vaccinated 2 otherwise");
-        boolean isPetVaccinated = sc.nextInt() == 1 ? true : false;
+        boolean isPetVaccinated = reader.scannerInt() == 1 ? true : false;
         System.out.println("Enter deparasitation Year. Enter 0 if not deparasitated");
-        int deparasitationYear = sc.nextInt();
+        int deparasitationYear = reader.scannerInt();
 
         Pet pet = new Pet(petSpecies, petName, petbreed, owner, isPetVaccinated, deparasitationYear);
 
         pets.add(pet);
-
-
+        System.out.println("Succesful registration");
+        System.out.println(pets.get(0));
 
 
 

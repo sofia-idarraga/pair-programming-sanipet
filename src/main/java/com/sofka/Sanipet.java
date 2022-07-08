@@ -10,6 +10,7 @@ public class Sanipet {
 
         ui.displayMenu();
 
+
     /*
         ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 
