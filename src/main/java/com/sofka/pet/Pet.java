@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Pet {
+public abstract class Pet {
 
     protected String clinicHistoryNumber;
     protected String name;
