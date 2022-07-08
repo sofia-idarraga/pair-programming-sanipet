@@ -26,4 +26,15 @@ public class Appointment {
     public void setAppointmentType(AppointmentType appointmentType) {
         this.appointmentType = appointmentType;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointmentType=" + appointmentType +
+                ", pet=" + pet +
+                ", employee=" + employee +
+                ", status=" + status +
+                ", schedule=" + schedule +
+                '}';
+    }
 }

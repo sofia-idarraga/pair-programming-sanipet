@@ -3,12 +3,12 @@ package com.sofka.management;
 public class Medicine {
 
     private String name;
-    private String presentation;
+    private Presentation presentation;
     private String usage;
     private int dosis;
     private int stock;
 
-    public Medicine(String name, String presentation, String usage, int dosis, int stock) {
+    public Medicine(String name, Presentation presentation, String usage, int dosis, int stock) {
         this.name = name;
         this.presentation = presentation;
         this.usage = usage;

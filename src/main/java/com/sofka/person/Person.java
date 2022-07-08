@@ -15,4 +15,15 @@ public abstract class Person {
         this.cellPhone = cellPhone;
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "dni='" + dni + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", cellPhone='" + cellPhone + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

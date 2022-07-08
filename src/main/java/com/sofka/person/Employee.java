@@ -68,4 +68,13 @@ public abstract class Employee {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", workday=" + workday +
+                ", schedules=" + schedules +
+                '}';
+    }
 }

@@ -41,5 +41,16 @@ public abstract class Pet {
         medicine.decreaseStock(1);
     }
 
-
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", owner=" + owner +
+                ", isVaccinated=" + isVaccinated +
+                ", desparasitationDate=" + desparasitationDate +
+                ", prescription=" + prescription +
+                ", clinicHistNum='" + clinicHistNum + '\'' +
+                '}';
+    }
 }
