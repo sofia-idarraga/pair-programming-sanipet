@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public abstract class Pet {
 
-    protected String clinicHistoryNumber;
     protected String name;
     protected String breed;
     protected Owner owner;
     protected boolean isVaccinated;
     protected LocalDate desparasitationDate;
     protected ArrayList<Medicine> prescription;
-    static int clinicHistoryRecord = 0;
+    protected String clinicHistNum;
+    protected static int generalHistNum = 0;
 
     public Pet(String name, String breed, Owner owner) {
         /*this.clinicHistoryNumber = Pet.setClinicHistoryNumber();*/   //PENDING TO GENERATE ID
@@ -24,13 +24,17 @@ public abstract class Pet {
         this.breed = breed;
         this.owner = owner;
         this.prescription = new ArrayList<Medicine>();
+        this.clinicHistNum = generateClinicHistNum(generalHistNum);
+
     }
 
-   /* public String setClicHistoryNumber(){
-        int temporal = Pet.clinicHistoryRecord;
-        Pet.clinicHistoryRecord++;
-        return "00000"temporal
-    }*/
+    public String generateClinicHistNum(int histNum){
+
+        generalHistNum += 1;
+        int Num = generalHistNum;
+        return (String.format("%06d", Num));
+
+    }
 
     public void addMedicine(Medicine medicine){
         this.prescription.add(medicine);
