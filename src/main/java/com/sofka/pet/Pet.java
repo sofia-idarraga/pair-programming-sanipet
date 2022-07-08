@@ -7,23 +7,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public abstract class Pet {
+public  class Pet {
 
+    protected String species;
     protected String name;
     protected String breed;
     protected Owner owner;
     protected boolean isVaccinated;
-    protected LocalDate desparasitationDate;
+    protected int desparasitationYear;
     protected ArrayList<Medicine> prescription;
     protected String clinicHistNum;
     protected static int generalHistNum = 0;
 
-    public Pet(String name, String breed, Owner owner) {
-        /*this.clinicHistoryNumber = Pet.setClinicHistoryNumber();*/   //PENDING TO GENERATE ID
+    public Pet(String species, String name, String breed, Owner owner, boolean isVaccinated, int desparasitationYear) {
+
+        this.species = species;
         this.name = name;
         this.breed = breed;
         this.owner = owner;
-        this.prescription = new ArrayList<Medicine>();
+        this.isVaccinated = isVaccinated;
+        this.desparasitationYear = desparasitationYear;
         this.clinicHistNum = generateClinicHistNum(generalHistNum);
 
     }
@@ -48,7 +51,7 @@ public abstract class Pet {
                 ", breed='" + breed + '\'' +
                 ", owner=" + owner +
                 ", isVaccinated=" + isVaccinated +
-                ", desparasitationDate=" + desparasitationDate +
+                ", desparasitationDate=" + desparasitationYear +
                 ", prescription=" + prescription +
                 ", clinicHistNum='" + clinicHistNum + '\'' +
                 '}';

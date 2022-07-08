@@ -12,6 +12,7 @@ public class Appointment {
     private StatusType status;
     private Schedule schedule;
     private LocalDate appointmentDate;
+    //TODO INGRESAR PRECIO DEL APPOINTMENT
 
     public Appointment(AppointmentType appointmentType, Pet pet, Employee employee, Schedule schedule, LocalDate appointmentDate) {
         this.appointmentType = appointmentType;

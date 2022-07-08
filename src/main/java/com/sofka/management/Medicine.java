@@ -14,6 +14,7 @@ public class Medicine {
         this.usage = usage;
         this.dosis = dosis;
         this.stock = stock;
+        //TODO INGRESAR PRECIO
     }
 
     public void decreaseStock(int decreaseBy){
