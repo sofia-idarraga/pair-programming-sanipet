@@ -28,4 +28,12 @@ public class Schedule {
         return outHour;
     }
 
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "day=" + day +
+                ", entranceHour='" + entranceHour + '\'' +
+                ", outHour='" + outHour + '\'' +
+                '}';
+    }
 }
