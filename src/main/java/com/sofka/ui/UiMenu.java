@@ -1,10 +1,6 @@
 package com.sofka.ui;
 
-import com.sofka.management.Appointment;
-import com.sofka.management.AppointmentType;
-import com.sofka.management.Schedule;
-import com.sofka.management.StatusType;
-import com.sofka.management.Medicine;
+import com.sofka.management.*;
 import com.sofka.person.Employee;
 import com.sofka.person.Owner;
 import com.sofka.pet.Pet;
@@ -191,19 +187,34 @@ public class UiMenu {
     public void updateAppointmentStatus(String ownerDni,int status){
         Appointment foundAppointment = null;
         for (Appointment appointment: appointments ) {
+
             if (ownerDni.equals(appointment.getPet().getOwner().getDni())) {
                 foundAppointment = appointment;
-                foundAppointment.displayInfo();
-                if (status != 3) {
-                    foundAppointment.setStatus(StatusType.values()[status]);
-                    System.out.println(foundAppointment.displayInfo());
-                }
-                else if (ChronoUnit.DAYS.between(LocalDate.now(),foundAppointment.getAppointmentDate()) > 2) {
-                    foundAppointment.setStatus(StatusType.values()[status]);
-                    System.out.println("Appointment has been Cancelled");
-                }
-                else{
-                    System.out.println("Appointments must not be cancelled with less than one day of anticipation");
+
+                switch(status){
+                    //finished
+                    //abscent
+                    //cancelled
+                    case 1:
+                        foundAppointment.setStatus(StatusType.values()[status]);
+                        System.out.println(foundAppointment.displayInfo());
+                        //TODO Falta builder del Bill
+                        HashMap prescription = addPrescription();
+                        Bill bill = new Bill(foundAppointment,prescription);
+
+                        break;
+                    case 2:
+                        foundAppointment.setStatus(StatusType.values()[status]);
+                        System.out.println(foundAppointment.displayInfo());
+                        break;
+                    case 3:
+                        if (ChronoUnit.DAYS.between(LocalDate.now(),foundAppointment.getAppointmentDate()) > 2) {
+                            foundAppointment.setStatus(StatusType.values()[status]);
+                            System.out.println("Appointment has been Cancelled");
+                        }
+                        else{
+                            System.out.println("Appointments must not be cancelled with less than one day of anticipation");
+                        }
                 }
             }
             else {
@@ -250,17 +261,19 @@ public class UiMenu {
     //TODO call the prescription adder from some place... perhaps the bill class?
     public HashMap<Medicine,Integer> addPrescription(){
 
-        String answer; //For some reason I have to declare the Variable answer here idk why!
+        System.out.println("Do you wish to add a prescription to the patient. Y / N");
+        String answer = reader.scannerText();
+
         HashMap<Medicine,Integer> prescription = new HashMap<Medicine,Integer>();
 
-        do {
-
+        while(!answer.equals("N")){
             System.out.println("Medicine name:");
             String requiredMed = reader.scannerText();
+            boolean notFound = true;
             for (Medicine medicine : medicineStock){
 
                 if (requiredMed.equals(medicine.getName())){
-
+                    notFound = false;
                     System.out.println("Quantity to add");
                     int requiredStock = reader.scannerInt();
 
@@ -272,15 +285,20 @@ public class UiMenu {
                     else {
                         System.out.println("Currently there's only " + medicine.getStock() + " units of " + medicine.getName() + " in stock");
                     }
-                }
-                else {
-                    System.out.println("No medicine found with that name");
+
+
                 }
             }
+
+            if(notFound){
+                System.out.println("No medicine found with that name");
+            }
+
+
             System.out.println("Add another medicine? (Y/N)");
             answer = reader.scannerText();
+        }
 
-        } while(answer.equals("Y"));
         return prescription;
     }
 
