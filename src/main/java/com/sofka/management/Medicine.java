@@ -54,7 +54,7 @@ public class Medicine {
     public String displayInfo(boolean showDetails){
         String info = ("MEDICINE: " + this.name + " STOCK: " + this.stock + " PRICE: " + this.unitPrice);
         if (showDetails) {
-            info.concat("\n" + this.presentation + " of " + this.dosis + " dosis for " + this.usage + " use");
+            info = info.concat("\n" + this.presentation + " of " + this.dosis + " dosis for " + this.usage + " use");
         }
         return info;
     }

@@ -17,63 +17,36 @@ public class Bill {
 
         this.appointment = appointment;
         this.prescription = prescription;
+        this.subtotal = appointment.getAppointmentType().cost;
     }
 
 
-    public void setBillingAmount(){
-
-        int prescriptionAccumulator = 0;
+    public void calculatePrescription(){
 
         Iterator<Map.Entry<Medicine,Integer>> iterator = this.prescription.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry<Medicine,Integer> entry = iterator.next();
-            System.out.println("");
-            prescriptionAccumulator += entry.getValue() * entry.getKey().getUnitPrice();
+            Medicine currentMedicine = entry.getKey();
+            int currentQuantity = entry.getValue();
+            this.subtotal += currentQuantity * currentMedicine.getUnitPrice();
+            System.out.println("\t*MEDICINE: " + currentMedicine.getName() + " - QUANTITY: " + currentQuantity + " - COST: " + currentQuantity * currentMedicine.getUnitPrice() + "$");
         }
-
-        this.subtotal = this.appointment.getAppointmentType().cost + prescriptionAccumulator;
-
-        this.total = subtotal * taxRate;
-
-
     }
 
-
-
-
-   /* this.subtotal += appointment.getAppointmentType().cost;
-        if (prescription.size() > 0) {
-        for (int i = 0; i < prescription.size(); i++) {
-            this.subtotal += prescription.get();
+    public void invoice(){
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("INVOICE FOR " + this.appointment.getPet().getOwner().getSurname() + " " + this.appointment.getPet().getOwner().getName() + "\n");
+        System.out.println(this.appointment.getAppointmentType() + " procedure for a cost of " + this.appointment.getAppointmentType().cost + "$");
+        System.out.println("MEDICINE PRESCRIPTION:");
+        if (this.prescription.size() > 0){
+            calculatePrescription();
         }
-    }*/
-
-
-    public String printBill(){
-
-        //TODO perhaps we could add more info about the patient with more getters on the pet class?
-        return new StringBuilder()
-                .append("PATIENT OWNER: " + this.appointment.getPet().getOwner().getName() + " " +
-                        this.appointment.getPet().getOwner().getSurname()+ "\n")
-                .append("PROCEDURE: " + this.appointment.getAppointmentType() + "\n")
-                .append("STATUS: " + this.status + "\n")
-
-                .append("TIME OF PROCEDURE: " + this.schedule.getEntranceHour() + " to " + this.schedule.getOutHour())
-                .toString();
-    }
-
-
-
-    public String printBill(){
-
-        //billFormat =
-
-        if (this.prescription != null){
-
+        else{
+            System.out.println("No prescription Invoiced.");
         }
-        return  billFormat;
-
-
+        System.out.println("\nSUBTOTAL = " + this.subtotal + "$");
+        System.out.println("TOTAL (Taxes accounted) = " + this.subtotal * taxRate + "$");
+        System.out.println("---------------------------------------------------------------------");
     }
 
 }

@@ -20,15 +20,7 @@ public class UiMenu {
     public ArrayList<Appointment> appointments = setByDefault.setAppointment();
     public ArrayList<Medicine> medicineStock = setByDefault.setMedicines();
 
-
-    // Appointment options must manage CRUD
-    // No need to make filterings at medicine
-    // Medicine stock displays all the medicine with their data
-    // Billing displays quantity, description of appointment, and shouldn't allow for bills of items out of stock
-    // Billing should also take taxes into calculus of price (subtotal / total)
-
     public void displayMenu(){
-
 
         int option = 0;
 
@@ -42,11 +34,10 @@ public class UiMenu {
                     1. Register Patient
                     2. Appointments
                         1. Create appointment
-                        2. Update / Cancel appointment   
+                        2. Finish / Update / Cancel appointment   
                         3. Search appointments by date
-                    3. Billing
-                    4. Medicine Stock
-                    5. Exit
+                    3. Medicine Stock
+                    4. Exit
                     
                     """);
             option = reader.scannerInt();
@@ -61,15 +52,10 @@ public class UiMenu {
                     break;
                 }
                 case 3:{
-                    //TODO create bill class and implement the prescription builder
-                    //Bill bill = new Bill() ??
-                }
-                case 4:{
                     displayMedicineStock();
                 }
-
             }
-        } while(option != 5);
+        } while(option != 4);
     }
 
     public void appointmentMenu(){
@@ -80,7 +66,7 @@ public class UiMenu {
                 Appointment Options
                 
                 1. Create appointment
-                2. Update / Cancel appointment
+                2. Finish / Update / Cancel appointment
                 3. Search appointments by date               
                 """);
         appointmentOption = reader.scannerInt();
@@ -98,7 +84,7 @@ public class UiMenu {
                         """
                         New status for Appointment:
                         
-                        1. FINISHED
+                        1. FINISHED (Generate Invoice)
                         2. ABSENT
                         3. CANCELLED      
                         """
@@ -152,7 +138,6 @@ public class UiMenu {
         System.out.println("Succesful registration");
         System.out.println(pets.get(0));
 
-        //TODO check dnis
     }
 
     public void createAppointment(){
@@ -192,15 +177,12 @@ public class UiMenu {
                 foundAppointment = appointment;
 
                 switch(status){
-                    //finished
-                    //abscent
-                    //cancelled
                     case 1:
                         foundAppointment.setStatus(StatusType.values()[status]);
                         System.out.println(foundAppointment.displayInfo());
-                        //TODO Falta builder del Bill
                         HashMap prescription = addPrescription();
                         Bill bill = new Bill(foundAppointment,prescription);
+                        bill.invoice();
 
                         break;
                     case 2:
