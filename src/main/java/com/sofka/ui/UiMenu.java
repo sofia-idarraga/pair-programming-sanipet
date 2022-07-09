@@ -9,8 +9,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class UiMenu {
-    //TODO Hacer metodo que borre appointment a terminado
-
     SetByDefault setByDefault = new SetByDefault();
     Reader reader = new Reader();
 
@@ -60,7 +58,7 @@ public class UiMenu {
 
     public void appointmentMenu(){
         int appointmentOption=0;
-        //TODO perhaps we could add an option to delete cancelled appointments? it's not hard!
+
         System.out.println(
                 """
                 Appointment Options
@@ -240,7 +238,6 @@ public class UiMenu {
         return foundPet;
     }
 
-    //TODO call the prescription adder from some place... perhaps the bill class?
     public HashMap<Medicine,Integer> addPrescription(){
 
         System.out.println("Do you wish to add a prescription to the patient. Y / N");

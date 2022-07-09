@@ -51,7 +51,6 @@ public class Appointment {
 
     public String displayInfo(){
 
-        //TODO perhaps we could add more info about the patient with more getters on the pet class?
         return new StringBuilder()
                 .append("PATIENT: " + this.pet.getName() + "\n")
                 .append("OWNER'S NAME: " + this.pet.getOwner().getSurname() + " " + this.pet.getOwner().getName() + "\n")

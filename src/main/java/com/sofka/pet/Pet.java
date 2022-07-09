@@ -14,7 +14,6 @@ public  class Pet {
     protected Owner owner;
     protected boolean isVaccinated;
     protected int desparasitationYear;
-    /*protected ArrayList<Medicine> prescription;*/ //TO SAFE DELETE LATER
     protected String clinicHistNum;
     protected static int generalHistNum = 0;
 
@@ -37,11 +36,6 @@ public  class Pet {
         return (String.format("%06d", Num));
 
     }
-
-    /*public void addMedicine(Medicine medicine){
-        this.prescription.add(medicine);
-        medicine.decreaseStock(1);
-    }*/
 
     public Owner getOwner() {
         return owner;
