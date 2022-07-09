@@ -1,8 +1,6 @@
 package com.sofka.ui;
 
-import com.sofka.management.Appointment;
-import com.sofka.management.AppointmentType;
-import com.sofka.management.Schedule;
+import com.sofka.management.*;
 import com.sofka.person.Doctor;
 import com.sofka.person.Employee;
 import com.sofka.person.Owner;
@@ -50,8 +48,6 @@ public class SetByDefault {
         return employees;
     }
 
-
-
     public ArrayList<Appointment> setAppointment(){
 
         ArrayList<Appointment> appointment = new ArrayList<Appointment>();
@@ -62,6 +58,17 @@ public class SetByDefault {
         appointment.add(appointment1);
 
         return appointment;
+    }
+
+    public ArrayList<Medicine> setMedicines(){
+        ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+        Medicine med1 = new Medicine("Catamol", Presentation.PET_CARE,"Veterinary",200,25,10);
+        Medicine med2 = new Medicine("Doggax", Presentation.SYRUP,"Human",100,10,15);
+        Medicine med3 = new Medicine("Gatecaminofen", Presentation.PILLS,"Veterinary",75,5,24);
+        medicines.add(med1);
+        medicines.add(med2);
+        medicines.add(med3);
+        return medicines;
     }
 
 }

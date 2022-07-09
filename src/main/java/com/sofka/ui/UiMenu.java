@@ -4,17 +4,13 @@ import com.sofka.management.Appointment;
 import com.sofka.management.AppointmentType;
 import com.sofka.management.Schedule;
 import com.sofka.management.StatusType;
+import com.sofka.management.Medicine;
 import com.sofka.person.Employee;
 import com.sofka.person.Owner;
 import com.sofka.pet.Pet;
-
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class UiMenu {
     //TODO Hacer metodo que borre appointment a terminado
@@ -26,6 +22,7 @@ public class UiMenu {
     public ArrayList<Pet> pets = setByDefault.setPets();
     public ArrayList<Employee> employees = setByDefault.setEmployees();
     public ArrayList<Appointment> appointments = setByDefault.setAppointment();
+    public ArrayList<Medicine> medicineStock = setByDefault.setMedicines();
 
 
     // Appointment options must manage CRUD
@@ -66,6 +63,13 @@ public class UiMenu {
                 case 2:{
                     appointmentMenu();
                     break;
+                }
+                case 3:{
+                    //TODO create bill class and implement the prescription builder
+                    //Bill bill = new Bill() ??
+                }
+                case 4:{
+                    displayMedicineStock();
                 }
 
             }
@@ -151,6 +155,8 @@ public class UiMenu {
         pets.add(pet);
         System.out.println("Succesful registration");
         System.out.println(pets.get(0));
+
+        //TODO check dnis
     }
 
     public void createAppointment(){
@@ -222,6 +228,14 @@ public class UiMenu {
         }
     }
 
+    public void displayMedicineStock(){
+        System.out.println("MEDICINE CURRENT STOCK: \n");
+        for (Medicine medicine : medicineStock){
+            System.out.println(medicine.displayInfo(true) + "\n");
+        }
+    }
+
+
     public Pet searchPetByOwnerDni(String ownerDni) {
         Pet foundPet = null;
         for (Pet pet: pets ) {
@@ -233,6 +247,41 @@ public class UiMenu {
         return foundPet;
     }
 
+    //TODO call the prescription adder from some place... perhaps the bill class?
+    public HashMap<Medicine,Integer> addPrescription(){
 
+        String answer; //For some reason I have to declare the Variable answer here idk why!
+        HashMap<Medicine,Integer> prescription = new HashMap<Medicine,Integer>();
+
+        do {
+
+            System.out.println("Medicine name:");
+            String requiredMed = reader.scannerText();
+            for (Medicine medicine : medicineStock){
+
+                if (requiredMed.equals(medicine.getName())){
+
+                    System.out.println("Quantity to add");
+                    int requiredStock = reader.scannerInt();
+
+                    if (requiredStock <= medicine.getStock()){
+                        prescription.put(medicine,requiredStock);
+                        medicine.decreaseStock(requiredStock);
+                        System.out.println("CURRENT PRESCRIPTION:\n" + prescription);
+                    }
+                    else {
+                        System.out.println("Currently there's only " + medicine.getStock() + " units of " + medicine.getName() + " in stock");
+                    }
+                }
+                else {
+                    System.out.println("No medicine found with that name");
+                }
+            }
+            System.out.println("Add another medicine? (Y/N)");
+            answer = reader.scannerText();
+
+        } while(answer.equals("Y"));
+        return prescription;
+    }
 
 }

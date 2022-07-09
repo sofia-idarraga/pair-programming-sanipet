@@ -3,7 +3,6 @@ package com.sofka.pet;
 import com.sofka.management.Medicine;
 import com.sofka.person.Owner;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 

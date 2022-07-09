@@ -7,14 +7,28 @@ public class Medicine {
     private String usage;
     private int dosis;
     private int stock;
+    private int unitPrice;
 
-    public Medicine(String name, Presentation presentation, String usage, int dosis, int stock) {
+    public Medicine(String name, Presentation presentation, String usage, int dosis, int stock, int unitPrice) {
         this.name = name;
         this.presentation = presentation;
         this.usage = usage;
         this.dosis = dosis;
         this.stock = stock;
-        //TODO INGRESAR PRECIO
+        this.unitPrice = unitPrice;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
     }
 
     public void decreaseStock(int decreaseBy){
@@ -29,11 +43,19 @@ public class Medicine {
     public String toString() {
         return "Medicine{" +
                 "name='" + name + '\'' +
-                ", presentation='" + presentation + '\'' +
+                ", presentation=" + presentation +
                 ", usage='" + usage + '\'' +
                 ", dosis=" + dosis +
                 ", stock=" + stock +
+                ", unitPrice=" + unitPrice +
                 '}';
     }
 
+    public String displayInfo(boolean showDetails){
+        String info = ("MEDICINE: " + this.name + " STOCK: " + this.stock + " PRICE: " + this.unitPrice);
+        if (showDetails) {
+            info.concat("\n" + this.presentation + " of " + this.dosis + " dosis for " + this.usage + " use");
+        }
+        return info;
+    }
 }
