@@ -11,6 +11,7 @@ public class Appointment {
     private StatusType status;
     private Schedule schedule;
     private LocalDate appointmentDate;
+
     //TODO INGRESAR PRECIO DEL APPOINTMENT
 
     Reader reader = new Reader();
@@ -27,6 +28,10 @@ public class Appointment {
         return pet;
     }
 
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
+    }
+
     public void setStatus(StatusType status) {
         this.status = status;
     }
@@ -40,5 +45,18 @@ public class Appointment {
                 ", schedule=" + schedule +
                 ", AppointmentDate=" + appointmentDate +
                 '}';
+    }
+
+    public String displayInfo(){
+
+        //TODO perhaps we could add more info about the patient with more getters on the pet class?
+        String info = new StringBuilder()
+                .append("PATIENT: " + this.pet.getName() + "\n")
+                .append("OWNER'S NAME: " + this.pet.getOwner().getSurname() + " " + this.pet.getOwner().getName() + "\n")
+                .append("PROCEDURE: " + this.appointmentType + "\n")
+                .append("STATUS: " + this.status + "\n")
+                .append("TIME OF PROCEDURE: " + this.schedule.getEntranceHour() + " to " + this.schedule.getOutHour())
+                .toString();
+        return info;
     }
 }

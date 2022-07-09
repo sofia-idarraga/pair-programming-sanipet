@@ -16,6 +16,14 @@ public abstract class Person {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
     public String getDni() {
         return dni;
     }

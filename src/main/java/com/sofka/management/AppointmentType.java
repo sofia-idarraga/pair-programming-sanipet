@@ -1,10 +1,11 @@
 package com.sofka.management;
 
 public enum AppointmentType {
-    MEDICAL(1), SURGERY(2), AESTHETIC(3);
+    MEDICAL(120), SURGERY(200), AESTHETIC(70);
 
- int number;
- AppointmentType(int number){
-     this.number=number;
+ int cost;
+
+ AppointmentType(int cost){
+     this.cost=cost;
  }
 }
