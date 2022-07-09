@@ -1,11 +1,15 @@
 package com.sofka.ui;
 
+import com.sofka.management.Appointment;
+import com.sofka.management.AppointmentType;
+import com.sofka.management.Schedule;
 import com.sofka.person.Doctor;
 import com.sofka.person.Employee;
 import com.sofka.person.Owner;
 import com.sofka.person.Stylist;
 import com.sofka.pet.Pet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SetByDefault {
@@ -45,4 +49,19 @@ public class SetByDefault {
 
         return employees;
     }
+
+
+
+    public ArrayList<Appointment> setAppointment(){
+
+        ArrayList<Appointment> appointment = new ArrayList<Appointment>();
+        Owner owner4 = new  Owner("12345", "Sofia", "Idarraga", "333456", 23);
+        Pet pet4 = new Pet("cat", "michi","meh", owner4,true,2021);
+        Appointment appointment1 = new Appointment(AppointmentType.MEDICAL,pet4,new Schedule(1,"5PM","6PM"), LocalDate.of(2022,8,5));
+
+        appointment.add(appointment1);
+
+        return appointment;
+    }
+
 }

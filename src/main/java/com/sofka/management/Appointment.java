@@ -1,8 +1,8 @@
 package com.sofka.management;
 
-import com.sofka.person.Employee;
 import com.sofka.pet.Pet;
 import java.time.LocalDate;
+import com.sofka.ui.Reader;
 
 public class Appointment {
 
@@ -13,6 +13,8 @@ public class Appointment {
     private LocalDate appointmentDate;
     //TODO INGRESAR PRECIO DEL APPOINTMENT
 
+    Reader reader = new Reader();
+
     public Appointment(AppointmentType appointmentType, Pet pet, Schedule schedule, LocalDate appointmentDate) {
         this.appointmentType = appointmentType;
         this.pet = pet;
@@ -21,12 +23,12 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
     }
 
-    public void setStatus(StatusType status) {
-        this.status = status;
+    public Pet getPet() {
+        return pet;
     }
 
-    public void setAppointmentType(AppointmentType appointmentType) {
-        this.appointmentType = appointmentType;
+    public void setStatus(StatusType status) {
+        this.status = status;
     }
 
     @Override

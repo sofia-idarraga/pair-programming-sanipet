@@ -3,10 +3,13 @@ package com.sofka.ui;
 import com.sofka.management.Appointment;
 import com.sofka.management.AppointmentType;
 import com.sofka.management.Schedule;
+import com.sofka.management.StatusType;
 import com.sofka.person.Employee;
 import com.sofka.person.Owner;
 import com.sofka.pet.Pet;
 
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,9 +21,10 @@ public class UiMenu {
     SetByDefault setByDefault = new SetByDefault();
     Reader reader = new Reader();
 
+
     public ArrayList<Pet> pets = setByDefault.setPets();
     public ArrayList<Employee> employees = setByDefault.setEmployees();
-
+    public ArrayList<Appointment> appointments = setByDefault.setAppointment();
 
 
     // Appointment options must manage CRUD
@@ -89,7 +93,25 @@ public class UiMenu {
         switch (appointmentOption){
             case 1:{
                 createAppointment();
+                break;
             }
+            case 2:{
+                System.out.println("Enter the owner's DNI to update the appointment");
+                String dni = reader.scannerText();
+                System.out.println(
+                        """
+                        New status for Appointment:
+                        
+                        1. FINISHED
+                        2. CANCELLED
+                        3. ABSENT       
+                        """
+                );
+                int status = reader.scannerInt();
+                updateAppointmentStatus(dni,status);
+                break;
+            }
+
         }
     }
 
@@ -135,7 +157,7 @@ public class UiMenu {
         System.out.println("1. MEDICAL");
         System.out.println("2. SURGERY");
         System.out.println("3. AESTHETIC");
-        int appointmentType = reader.scannerInt();
+        AppointmentType appointmentType = AppointmentType.values()[reader.scannerInt() - 1];
 
         System.out.println("Enter owner's DNI: ");
         String ownerDni = reader.scannerText();
@@ -153,19 +175,40 @@ public class UiMenu {
 
         Schedule schedule = new Schedule(appointmentDate.getDayOfWeek().getValue(), String.valueOf(initialHour), String.valueOf(initialHour+1));
         System.out.println(schedule);
-        Appointment appointment = new Appointment(AppointmentType.AESTHETIC,pet,schedule,appointmentDate);
+        Appointment appointment = new Appointment(appointmentType,pet,schedule,appointmentDate);
+        appointments.add(appointment);
         System.out.println(appointment);
     }
 
+    public void updateAppointmentStatus(String ownerDni,int status){
+
+        Appointment foundAppointment = null;
+
+        for (Appointment appointment: appointments ) {
+
+            System.out.println(appointment.getPet().getOwner().getDni());
+
+            if(ownerDni.equals(appointment.getPet().getOwner().getDni())){
+                System.out.println("Found!");
+                foundAppointment = appointment;
+                foundAppointment.setStatus(StatusType.values()[status]);
+                System.out.println(foundAppointment);
+            }
+            else {
+                System.out.println("Owner has no appointment");
+            }
+        }
+    }
+
     public Pet searchPetByOwnerDni(String ownerDni){
-        Pet foundedPet = null;
+        Pet foundPet = null;
         for (Pet pet: pets ) {
             Owner owner = pet.getOwner();
             if(ownerDni.equals(owner.getDni())){
-                foundedPet = pet;
+                foundPet = pet;
             }
         }
-        return foundedPet;
+        return foundPet;
     }
 
 
