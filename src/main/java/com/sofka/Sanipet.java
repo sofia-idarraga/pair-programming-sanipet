@@ -1,15 +1,15 @@
 package com.sofka;
 
 
+import com.sofka.person.Owner;
+import com.sofka.pet.Pet;
 import com.sofka.ui.UiMenu;
 
 public class Sanipet {
     public static void main(String[] args) {
 
         UiMenu ui = new UiMenu();
-
         ui.displayMenu();
-
 
     /*
         ArrayList<Appointment> appointments = new ArrayList<Appointment>();

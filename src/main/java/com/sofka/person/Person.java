@@ -16,6 +16,9 @@ public abstract class Person {
         this.age = age;
     }
 
+    public String getDni() {
+        return dni;
+    }
     @Override
     public String toString() {
         return "Person{" +

@@ -8,16 +8,14 @@ public class Appointment {
 
     private AppointmentType appointmentType;
     private Pet pet;
-    private Employee employee;
     private StatusType status;
     private Schedule schedule;
     private LocalDate appointmentDate;
     //TODO INGRESAR PRECIO DEL APPOINTMENT
 
-    public Appointment(AppointmentType appointmentType, Pet pet, Employee employee, Schedule schedule, LocalDate appointmentDate) {
+    public Appointment(AppointmentType appointmentType, Pet pet, Schedule schedule, LocalDate appointmentDate) {
         this.appointmentType = appointmentType;
         this.pet = pet;
-        this.employee = employee;
         this.status = StatusType.NOTSTARTED;
         this.schedule = schedule;
         this.appointmentDate = appointmentDate;
@@ -36,7 +34,6 @@ public class Appointment {
         return "Appointment{" +
                 "appointmentType=" + appointmentType +
                 ", pet=" + pet +
-                ", employee=" + employee +
                 ", status=" + status +
                 ", schedule=" + schedule +
                 ", AppointmentDate=" + appointmentDate +

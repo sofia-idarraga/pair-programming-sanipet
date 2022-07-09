@@ -44,6 +44,10 @@ public  class Pet {
         medicine.decreaseStock(1);
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
     @Override
     public String toString() {
         return "Pet{" +

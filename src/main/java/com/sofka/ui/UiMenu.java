@@ -1,17 +1,27 @@
 package com.sofka.ui;
 
+import com.sofka.management.Appointment;
+import com.sofka.management.AppointmentType;
+import com.sofka.management.Schedule;
+import com.sofka.person.Employee;
 import com.sofka.person.Owner;
 import com.sofka.pet.Pet;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UiMenu {
+    //TODO Hacer metodo que borre appointment a terminado
 
-    private ArrayList<Pet> pets = new ArrayList<Pet>();
-
-
+    SetByDefault setByDefault = new SetByDefault();
     Reader reader = new Reader();
+
+    public ArrayList<Pet> pets = setByDefault.setPets();
+    public ArrayList<Employee> employees = setByDefault.setEmployees();
+
+
 
     // Appointment options must manage CRUD
     // No need to make filterings at medicine
@@ -33,10 +43,10 @@ public class UiMenu {
                     
                     1. Register Patient
                     2. Appointments
-                        2.1 Create appointment.
-                        2.2 Update appointment
-                        2.3 Search appointment by date.
-                        2.4 Delete appointment (min 1 day before)
+                        1. Create appointment
+                        2. Update appointment   
+                        3. Cancel appointment
+                        4. Filter by date 
                     3. Billing
                     4. Medicine Stock
                         4.1 Pills
@@ -53,6 +63,8 @@ public class UiMenu {
                     break;
                 }
                 case 2:{
+                    appointmentMenu();
+                    break;
 
                 }
 
@@ -60,15 +72,36 @@ public class UiMenu {
         } while(option != 5);
     }
 
+    public void appointmentMenu(){
+        int appointmentOption=0;
+        System.out.println(
+                """
+                
+                APPOINTMENT OPTIONS
+                
+                1. Create appointment
+                2. Update appointment   
+                3. Cancel appointment
+                4. Filter by date                
+                """);
+        appointmentOption = reader.scannerInt();
+
+        switch (appointmentOption){
+            case 1:{
+                createAppointment();
+            }
+        }
+    }
+
     public void createPatient(){
 
-        System.out.println("Enter onwer´s DNI");
+        System.out.println("Enter owner´s DNI");
         String ownerDNI = reader.scannerText();
-        System.out.println("Enter onwer´s name");
+        System.out.println("Enter owner´s name");
         String ownerName = reader.scannerText();
-        System.out.println("Enter onwer´s surname");
+        System.out.println("Enter owner´s surname");
         String ownerSurname = reader.scannerText();
-        System.out.println("Enter onwer´s cellphone");
+        System.out.println("Enter owner´s cellphone");
         String ownerCellphone = reader.scannerText();
         System.out.println("Enter owner´s age");
         int ownerAge = reader.scannerInt();
@@ -95,9 +128,44 @@ public class UiMenu {
         pets.add(pet);
         System.out.println("Succesful registration");
         System.out.println(pets.get(0));
+    }
 
+    public void createAppointment(){
+        System.out.println("Select your appointment type: ");
+        System.out.println("1. MEDICAL");
+        System.out.println("2. SURGERY");
+        System.out.println("3. AESTHETIC");
+        int appointmentType = reader.scannerInt();
 
+        System.out.println("Enter owner's DNI: ");
+        String ownerDni = reader.scannerText();
+        Pet pet = searchPetByOwnerDni(ownerDni);
+        if(pet == null){
+            System.out.println("Your pet is not registered, please register your pet");
+            return;
+        }
+        System.out.println("Input your appointment date: yyyy-mm-dd");
+        String stringDate = reader.scannerText();
+        LocalDate appointmentDate = LocalDate.parse(stringDate);
 
+        System.out.println("At what hour do you want your appointment?");
+        int initialHour = reader.scannerInt();
+
+        Schedule schedule = new Schedule(appointmentDate.getDayOfWeek().getValue(), String.valueOf(initialHour), String.valueOf(initialHour+1));
+        System.out.println(schedule);
+        Appointment appointment = new Appointment(AppointmentType.AESTHETIC,pet,schedule,appointmentDate);
+        System.out.println(appointment);
+    }
+
+    public Pet searchPetByOwnerDni(String ownerDni){
+        Pet foundedPet = null;
+        for (Pet pet: pets ) {
+            Owner owner = pet.getOwner();
+            if(ownerDni.equals(owner.getDni())){
+                foundedPet = pet;
+            }
+        }
+        return foundedPet;
     }
 
 
