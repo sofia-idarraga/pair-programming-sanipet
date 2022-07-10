@@ -35,10 +35,6 @@ public class Medicine {
         this.stock -= decreaseBy;
     }
 
-    public void increaseStock(int increaseBy){
-        this.stock += increaseBy;
-    }
-
     @Override
     public String toString() {
         return "Medicine{" +

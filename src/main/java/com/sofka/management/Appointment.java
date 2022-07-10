@@ -12,8 +12,6 @@ public class Appointment {
     private Schedule schedule;
     private LocalDate appointmentDate;
 
-    Reader reader = new Reader();
-
     public Appointment(AppointmentType appointmentType, Pet pet, Schedule schedule, LocalDate appointmentDate) {
         this.appointmentType = appointmentType;
         this.pet = pet;

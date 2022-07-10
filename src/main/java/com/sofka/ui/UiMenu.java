@@ -12,7 +12,6 @@ public class UiMenu {
     SetByDefault setByDefault = new SetByDefault();
     Reader reader = new Reader();
 
-
     public ArrayList<Pet> pets = setByDefault.setPets();
     public ArrayList<Employee> employees = setByDefault.setEmployees();
     public ArrayList<Appointment> appointments = setByDefault.setAppointment();
@@ -133,8 +132,8 @@ public class UiMenu {
         Pet pet = new Pet(petSpecies, petName, petbreed, owner, isPetVaccinated, deparasitationYear);
 
         pets.add(pet);
+        System.out.println(pet);
         System.out.println("Succesful registration");
-        System.out.println(pets.get(0));
 
     }
 
@@ -197,9 +196,9 @@ public class UiMenu {
                         }
                 }
             }
-            else {
-                System.out.println("Owner has no appointment");
-            }
+        }
+        if (foundAppointment == null){
+            System.out.println("Owner has no appointment");
         }
     }
 
